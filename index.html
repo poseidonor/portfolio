@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poseidonor | AI Creator Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.08), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.06), transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .header {
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.5), transparent);
+            animation: lineGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes lineGlow {
+            0%, 100% { opacity: 0.3; width: 60px; }
+            50% { opacity: 1; width: 100px; }
+        }
+
+        h1 {
+            font-size: 4em;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #a78bfa 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #9ca3af;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+        }
+
+        .author-name {
+            font-size: 0.9em;
+            color: #6b7280;
+            font-weight: 300;
+            letter-spacing: 0.08em;
+            margin-top: 15px;
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+        }
+
+        .tools {
+            font-size: 0.85em;
+            color: #4b5563;
+            margin-top: 25px;
+            letter-spacing: 0.05em;
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+        }
+
+        .featured-label {
+            display: inline-block;
+            font-size: 0.75em;
+            color: #a78bfa;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin-top: 40px;
+            letter-spacing: 0.1em;
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+            backdrop-filter: blur(10px);
+            background: rgba(167, 139, 250, 0.05);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 30px;
+            padding: 40px 20px;
+            margin-bottom: 80px;
+        }
+
+        .video-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(17, 17, 17, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            animation: cardFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+            backdrop-filter: blur(20px);
+            will-change: transform;
+        }
+
+        .video-card:nth-child(1) { animation-delay: 0.1s; }
+        .video-card:nth-child(2) { animation-delay: 0.15s; }
+        .video-card:nth-child(3) { animation-delay: 0.2s; }
+        .video-card:nth-child(4) { animation-delay: 0.25s; }
+        .video-card:nth-child(5) { animation-delay: 0.3s; }
+        .video-card:nth-child(6) { animation-delay: 0.35s; }
+        .video-card:nth-child(7) { animation-delay: 0.4s; }
+        .video-card:nth-child(8) { animation-delay: 0.45s; }
+        .video-card:nth-child(9) { animation-delay: 0.5s; }
+        .video-card:nth-child(10) { animation-delay: 0.55s; }
+        .video-card:nth-child(11) { animation-delay: 0.6s; }
+
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(167, 139, 250, 0.3);
+            box-shadow: 0 20px 60px rgba(138, 43, 226, 0.2);
+        }
+
+        .video-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.05) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .video-card:hover::before {
+            opacity: 1;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(8px) brightness(0.7);
+            transform: scale(1.05);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, filter;
+        }
+
+        .video-card:hover .video-thumbnail img {
+            filter: blur(4px) brightness(0.5);
+            transform: scale(1.1);
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            z-index: 2;
+        }
+
+        .play-button {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: scale(0.9);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-card:hover .play-button {
+            transform: scale(1);
+            background: #fff;
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 20px solid #0a0a0a;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 4px;
+        }
+
+        .video-info {
+            padding: 28px;
+            background: rgba(10, 10, 10, 0.4);
+        }
+
+        .video-number {
+            font-size: 0.7em;
+            color: #a78bfa;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .video-title {
+            font-size: 1.2em;
+            font-weight: 400;
+            margin-bottom: 10px;
+            color: #f3f4f6;
+            letter-spacing: 0.02em;
+        }
+
+        .video-description {
+            font-size: 0.9em;
+            color: #9ca3af;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        .section-divider {
+            text-align: center;
+            padding: 100px 20px 60px;
+            position: relative;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.5), transparent);
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            background: linear-gradient(135deg, #fff 0%, #a78bfa 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-subtitle {
+            font-size: 0.95em;
+            color: #6b7280;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 40px 20px 80px;
+        }
+
+        .photo-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(17, 17, 17, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            aspect-ratio: 1;
+            animation: cardFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+            backdrop-filter: blur(20px);
+            will-change: transform;
+        }
+
+        .photo-card:nth-child(1) { animation-delay: 0.1s; }
+        .photo-card:nth-child(2) { animation-delay: 0.12s; }
+        .photo-card:nth-child(3) { animation-delay: 0.14s; }
+        .photo-card:nth-child(4) { animation-delay: 0.16s; }
+        .photo-card:nth-child(5) { animation-delay: 0.18s; }
+        .photo-card:nth-child(6) { animation-delay: 0.2s; }
+        .photo-card:nth-child(7) { animation-delay: 0.22s; }
+        .photo-card:nth-child(8) { animation-delay: 0.24s; }
+        .photo-card:nth-child(9) { animation-delay: 0.26s; }
+        .photo-card:nth-child(10) { animation-delay: 0.28s; }
+        .photo-card:nth-child(11) { animation-delay: 0.3s; }
+        .photo-card:nth-child(12) { animation-delay: 0.32s; }
+        .photo-card:nth-child(13) { animation-delay: 0.34s; }
+        .photo-card:nth-child(14) { animation-delay: 0.36s; }
+        .photo-card:nth-child(15) { animation-delay: 0.38s; }
+        .photo-card:nth-child(16) { animation-delay: 0.4s; }
+        .photo-card:nth-child(17) { animation-delay: 0.42s; }
+
+        .photo-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(167, 139, 250, 0.3);
+            box-shadow: 0 15px 50px rgba(138, 43, 226, 0.2);
+        }
+
+        .photo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.05) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .photo-card:hover::before {
+            opacity: 1;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: brightness(0.9);
+            will-change: transform;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.05);
+            filter: brightness(1);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 2;
+        }
+
+        .photo-card:hover .photo-overlay {
+            opacity: 1;
+        }
+
+        .zoom-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transform: scale(0.8);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .photo-card:hover .zoom-icon {
+            transform: scale(1);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 80px 20px 50px;
+            color: #6b7280;
+            font-size: 0.85em;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.5), transparent);
+        }
+
+        .footer p:first-child {
+            margin-bottom: 12px;
+            color: #9ca3af;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .photo-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 15px;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.96);
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            animation: modalSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: scale(0.95) translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 100px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 70vh;
+            border: none;
+            display: block;
+        }
+
+        .preload-frame {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.3em;
+            color: #f3f4f6;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(20px);
+        }
+
+        .close-btn:hover {
+            background: rgba(167, 139, 250, 0.2);
+            border-color: rgba(167, 139, 250, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .video-controls {
+            background: rgba(10, 10, 10, 0.8);
+            padding: 20px;
+            border-radius: 0 0 12px 12px;
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .control-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            background: rgba(167, 139, 250, 0.1);
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            color: #f3f4f6;
+            padding: 10px 22px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(20px);
+        }
+
+        .control-btn:hover {
+            background: rgba(167, 139, 250, 0.2);
+            border-color: rgba(167, 139, 250, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .hint-text {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.85em;
+            margin-top: 15px;
+            font-weight: 300;
+        }
+
+        .photo-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .photo-modal.active {
+            display: flex;
+        }
+
+        .photo-modal-content {
+            position: relative;
+            max-width: 95%;
+            max-height: 95%;
+            animation: zoomIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .photo-modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 25px 100px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .photo-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(20px);
+        }
+
+        .photo-close:hover {
+            background: rgba(167, 139, 250, 0.2);
+            border-color: rgba(167, 139, 250, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .photo-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(20px);
+        }
+
+        .photo-nav:hover {
+            background: rgba(167, 139, 250, 0.2);
+            border-color: rgba(167, 139, 250, 0.3);
+        }
+
+        .photo-nav.prev {
+            left: 20px;
+        }
+
+        .photo-nav.next {
+            right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .video-container iframe {
+                height: 50vh;
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+
+            .control-btn {
+                padding: 9px 18px;
+                font-size: 12px;
+            }
+
+            .photo-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .photo-nav.prev {
+                left: 10px;
+            }
+
+            .photo-nav.next {
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>МАРК ЧЕРКАСОВ</h1>
+        <div class="subtitle">AI Creator • Video Portfolio</div>
+        <div class="author-name">poseidonor</div>
+        <div class="tools">Pika • Veo 3 • Kling • ElevenLabs • Nano Banano • Midjourney</div>
+        <div class="featured-label">ИЗБРАННЫЕ РАБОТЫ</div>
+    </div>
+
+    <div class="container">
+        <div class="gallery">
+            <div class="video-card" onclick="openVideo(0, 'Реклама Charisma Golf')">
+                <div class="video-thumbnail">
+                    <img src="https://drive.google.com/thumbnail?id=1JJpRK7MiREVmRzWlr026huMEXKwJ4Q6x&sz=w600" loading="lazy" alt="Charisma Golf">
+                    <div class="play-overlay">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <div class="video-number">Коммерческий заказ</div>
+                    <div class="video-title">Реклама Charisma Golf</div>
+                    <div class="video-description">Рекламный ролик</div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="openVideo(1, 'Born to be')">
+                <div class="video-thumbnail">
+                    <img src="https://drive.google.com/thumbnail?id=10xY07_EKnV-TL48yTsrYuvvDZ8EA3oCA&sz=w600" loading="lazy" alt="Born to be">
+                    <div class="play-overlay">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <div class="video-number">Творческий проект</div>
+                    <div class="video-title">Born to be</div>
+                    <div class="video-description">Атмосферное видео</div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="openVideo(2, 'Мини анимация магический шар')">
+                <div class="video-thumbnail">
+                    <img src="https://drive.google.com/thumbnail?id=1RntAMK-NStxZxRSQopQnUgFU5Fv0pTTO&sz=w600" loading="lazy" alt="Магический шар">
+                    <div class="play-overlay">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <div class="video-number">Авторская работа</div>
+                    <div class="video-title">Мини анимация магический шар</div>
+                    <div class="video-description">Магия и анимация</div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="openVideo(3, 'Видео по референсам лиц')">
+                <div class="video-thumbnail">
+                    <img src="https://drive.google.com/thumbnail?id=1yfAmYLxBp3eDBqibt47rmor0ALgEvHSb&sz=w600" loading="lazy" alt="Видео по референсам">
+                    <div class="play-overlay">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <div class="video-number">Коммерческий заказ</div>
+                    <div class="video-title">Видео по референсам лиц</div>
+                    <div class="video-description">Рекламный ролик</div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="openVideo(4, 'Реклама Pro Garant')">
+                <div class="video-thumbnail">
+                    <img src="https://drive.google.com/thumbnail?id=1FOKigR8QKNAlbInDDSuLvjw3XFhmrByr&sz=w600" loading="lazy" alt="Pro Garant">
+                    <div class="play-overlay">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <div class="video-number">Коммерческий заказ</div>
+                    <div class="video-title">Реклама Pro Garant</div>
+                    <div class="video-description">Рекламный ролик</div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="openVideo(5, 'Судьбоносная встреча')">
+                <div class="video-thumbnail">
+                    <img src="https://drive.google.com/thumbnail?id=1UYlp5vtiWGDn1ZGDnHj-jmHAwGLOmvFU&sz=w600" loading="lazy" alt="Судьбоносная встреча">
+                    <div class="play-overlay">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <div class="video-number">Коммерческий заказ</div>
+                    <div class="video-title">Судьбоносная встреча</div>
+                    <div class="video-description">Эмоциональная история</div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="openVideo(6, 'Начало Руси')">
+                <div class="video-thumbnail">
+                    <img src="https://drive.google.com/thumbnail?id=18ZKnuP_qY5LlOlNtEPHzRwwGbdeFM1_D&sz=w600" loading="lazy" alt="Начало Руси">
+                    <div class="play-overlay">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <div class="video-number">Коммерческий заказ</div>
+                    <div class="video-title">Начало Руси</div>
+                    <div class="video-description">Исторический контент</div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="openVideo(7, 'Рекламный ролик для одежды')">
+                <div class="video-thumbnail" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <img src="https://drive.google.com/thumbnail?id=1NUrvufh8N4h5q-DlY4d5TGS5f961grbY&sz=w600" loading="lazy" alt="Реклама одежды" onerror="this.style.display='none'">
+                    <div class="play-overlay">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <div class="video-number">Коммерческий заказ</div>
+                    <div class="video-title">Рекламный ролик для одежды</div>
+                    <div class="video-description">Fashion реклама</div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="openVideo(8, 'Ролик в стиле Гибли')">
+                <div class="video-thumbnail">
+                    <img src="https://drive.google.com/thumbnail?id=1xeIvfnM1dFYXGtKf8wj2HfputVBe2GJs&sz=w600" loading="lazy" alt="Стиль Гибли">
+                    <div class="play-overlay">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <div class="video-number">Коммерческий заказ</div>
+                    <div class="video-title">Ролик в стиле Гибли</div>
+                    <div class="video-description">Для соцсетей</div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="openVideo(9, 'Реклама gate.cx')">
+                <div class="video-thumbnail">
+                    <img src="https://drive.google.com/thumbnail?id=1YjjqLtt6VPuORQUA0uVvNccHfCr493xi&sz=w600" loading="lazy" alt="gate.cx">
+                    <div class="play-overlay">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <div class="video-number">Коммерческий заказ</div>
+                    <div class="video-title">Реклама gate.cx</div>
+                    <div class="video-description">Рекламный ролик</div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="openVideo(10, 'GWC')">
+                <div class="video-thumbnail">
+                    <img src="https://drive.google.com/thumbnail?id=1wxTXO3LuO9Bg5lNIuDtUoZ7GxVWvajsq&sz=w600" loading="lazy" alt="GWC">
+                    <div class="play-overlay">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <div class="video-number">Коммерческий заказ</div>
+                    <div class="video-title">GWC</div>
+                    <div class="video-description">Рекламный ролик</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-divider">
+        <div class="section-title">ФОТО ПОРТФОЛИО</div>
+        <div class="section-subtitle">AI Generated Images</div>
+    </div>
+
+    <div class="container">
+        <div class="photo-gallery">
+            <div class="photo-card" onclick="openPhoto(0)">
+                <img src="https://drive.google.com/thumbnail?id=104bqBwdKb6vXTADhWyjW1h3xLjWCLzue&sz=w600" loading="lazy" alt="AI Image 1">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(1)">
+                <img src="https://drive.google.com/thumbnail?id=1BPBHnQu7jaOhUCcMk8t4yHyj8qB-DwF1&sz=w600" loading="lazy" alt="AI Image 2">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(2)">
+                <img src="https://drive.google.com/thumbnail?id=1CR82oJo-f6-02XjsHIZLY9orpSV4Z7ej&sz=w600" loading="lazy" alt="AI Image 3">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(3)">
+                <img src="https://drive.google.com/thumbnail?id=1HtG0KnGKQ9h6vLGkrk7OUcyAuptFbtCG&sz=w600" loading="lazy" alt="AI Image 4">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(4)">
+                <img src="https://drive.google.com/thumbnail?id=1IrPZnCzsEpxKXxDATenVZvm67WUb157X&sz=w600" loading="lazy" alt="AI Image 5">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(5)">
+                <img src="https://drive.google.com/thumbnail?id=1JXZPrw1o38C7MSJKGeIq7PEx_oFTBv3a&sz=w600" loading="lazy" alt="AI Image 6">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(6)">
+                <img src="https://drive.google.com/thumbnail?id=1QsKFO3uv0EN3Cw2EDevCnvi9yqZTGw4G&sz=w600" loading="lazy" alt="AI Image 7">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(7)">
+                <img src="https://drive.google.com/thumbnail?id=1RB6V4GyCtX86j4oHNj5ew5HGAqMcTtB0&sz=w600" loading="lazy" alt="AI Image 8">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(8)">
+                <img src="https://drive.google.com/thumbnail?id=1WjnvZ8PZvMKRCavFf6u7K-P61nS1lQQl&sz=w600" loading="lazy" alt="AI Image 9">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(9)">
+                <img src="https://drive.google.com/thumbnail?id=1gJtq5wlfvrpWFzZ-SZ56gwW7-2-msvgS&sz=w600" loading="lazy" alt="AI Image 10">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(10)">
+                <img src="https://drive.google.com/thumbnail?id=1h29P7z-r6CtFLMmwJ_DAcXFR0vUfKZcm&sz=w600" loading="lazy" alt="AI Image 11">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(11)">
+                <img src="https://drive.google.com/thumbnail?id=1jLy4BYi4P0oNIV8ywpnsUHzPi2ypuE-9&sz=w600" loading="lazy" alt="AI Image 12">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(12)">
+                <img src="https://drive.google.com/thumbnail?id=1nssYE4IQ8vUWSIswyTcldujID_2_Smqs&sz=w600" loading="lazy" alt="AI Image 13">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(13)">
+                <img src="https://drive.google.com/thumbnail?id=1oWTfQD0MHW9KJZ4M5PE79b1mB5cdEW8D&sz=w600" loading="lazy" alt="AI Image 14">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(14)">
+                <img src="https://drive.google.com/thumbnail?id=1rLLLEMMdJ4hyQMYF1fRdmW45s3_iXMhT&sz=w600" loading="lazy" alt="AI Image 15">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(15)">
+                <img src="https://drive.google.com/thumbnail?id=1xXgz2QA-OJMHxv1gMGHBDKL7NIA70rr9&sz=w600" loading="lazy" alt="AI Image 16">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openPhoto(16)">
+                <img src="https://drive.google.com/thumbnail?id=1zIvmG6KAP7a1dK9rPfcoO1LjXjGoKONO&sz=w600" loading="lazy" alt="AI Image 17">
+                <div class="photo-overlay">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2024 POSEIDONOR | AI Creator Portfolio</p>
+        <p>Это избранные работы из моего портфолио</p>
+    </div>
+
+    <div id="modal" class="modal" onclick="closeVideo()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">ПРОЕКТ 01</div>
+                <button class="close-btn" onclick="closeVideo()">✕</button>
+            </div>
+            <div class="video-container">
+                <iframe id="videoPlayer" src="" allow="autoplay; fullscreen"></iframe>
+            </div>
+            <div class="video-controls">
+                <div class="control-row">
+                    <button class="control-btn" onclick="openInNewTab()">
+                        🔗 Открыть в Google Drive
+                    </button>
+                </div>
+                <div class="hint-text">
+                    💡 Используйте элементы управления видео для паузы, звука и качества
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="photoModal" class="photo-modal" onclick="closePhoto()">
+        <div class="photo-modal-content" onclick="event.stopPropagation()">
+            <button class="photo-close" onclick="closePhoto()">✕</button>
+            <button class="photo-nav prev" onclick="prevPhoto(); event.stopPropagation();">‹</button>
+            <button class="photo-nav next" onclick="nextPhoto(); event.stopPropagation();">›</button>
+            <img id="photoModalImg" src="" alt="AI Generated Image">
+        </div>
+    </div>
+
+    <script>
+        const videos = [
+            'https://drive.google.com/file/d/1JJpRK7MiREVmRzWlr026huMEXKwJ4Q6x/preview',
+            'https://drive.google.com/file/d/10xY07_EKnV-TL48yTsrYuvvDZ8EA3oCA/preview',
+            'https://drive.google.com/file/d/1RntAMK-NStxZxRSQopQnUgFU5Fv0pTTO/preview',
+            'https://drive.google.com/file/d/1yfAmYLxBp3eDBqibt47rmor0ALgEvHSb/preview',
+            'https://drive.google.com/file/d/1FOKigR8QKNAlbInDDSuLvjw3XFhmrByr/preview',
+            'https://drive.google.com/file/d/1UYlp5vtiWGDn1ZGDnHj-jmHAwGLOmvFU/preview',
+            'https://drive.google.com/file/d/18ZKnuP_qY5LlOlNtEPHzRwwGbdeFM1_D/preview',
+            'https://drive.google.com/file/d/1NUrvufh8N4h5q-DlY4d5TGS5f961grbY/preview',
+            'https://drive.google.com/file/d/1xeIvfnM1dFYXGtKf8wj2HfputVBe2GJs/preview',
+            'https://drive.google.com/file/d/1YjjqLtt6VPuORQUA0uVvNccHfCr493xi/preview',
+            'https://drive.google.com/file/d/1wxTXO3LuO9Bg5lNIuDtUoZ7GxVWvajsq/preview'
+        ];
+
+        const videoLinks = [
+            'https://drive.google.com/file/d/1JJpRK7MiREVmRzWlr026huMEXKwJ4Q6x/view',
+            'https://drive.google.com/file/d/10xY07_EKnV-TL48yTsrYuvvDZ8EA3oCA/view',
+            'https://drive.google.com/file/d/1RntAMK-NStxZxRSQopQnUgFU5Fv0pTTO/view',
+            'https://drive.google.com/file/d/1yfAmYLxBp3eDBqibt47rmor0ALgEvHSb/view',
+            'https://drive.google.com/file/d/1FOKigR8QKNAlbInDDSuLvjw3XFhmrByr/view',
+            'https://drive.google.com/file/d/1UYlp5vtiWGDn1ZGDnHj-jmHAwGLOmvFU/view',
+            'https://drive.google.com/file/d/18ZKnuP_qY5LlOlNtEPHzRwwGbdeFM1_D/view',
+            'https://drive.google.com/file/d/1NUrvufh8N4h5q-DlY4d5TGS5f961grbY/view',
+            'https://drive.google.com/file/d/1xeIvfnM1dFYXGtKf8wj2HfputVBe2GJs/view',
+            'https://drive.google.com/file/d/1YjjqLtt6VPuORQUA0uVvNccHfCr493xi/view',
+            'https://drive.google.com/file/d/1wxTXO3LuO9Bg5lNIuDtUoZ7GxVWvajsq/view'
+        ];
+
+        const photos = [
+            'https://lh3.googleusercontent.com/d/104bqBwdKb6vXTADhWyjW1h3xLjWCLzue',
+            'https://lh3.googleusercontent.com/d/1BPBHnQu7jaOhUCcMk8t4yHyj8qB-DwF1',
+            'https://lh3.googleusercontent.com/d/1CR82oJo-f6-02XjsHIZLY9orpSV4Z7ej',
+            'https://lh3.googleusercontent.com/d/1HtG0KnGKQ9h6vLGkrk7OUcyAuptFbtCG',
+            'https://lh3.googleusercontent.com/d/1IrPZnCzsEpxKXxDATenVZvm67WUb157X',
+            'https://lh3.googleusercontent.com/d/1JXZPrw1o38C7MSJKGeIq7PEx_oFTBv3a',
+            'https://lh3.googleusercontent.com/d/1QsKFO3uv0EN3Cw2EDevCnvi9yqZTGw4G',
+            'https://lh3.googleusercontent.com/d/1RB6V4GyCtX86j4oHNj5ew5HGAqMcTtB0',
+            'https://lh3.googleusercontent.com/d/1WjnvZ8PZvMKRCavFf6u7K-P61nS1lQQl',
+            'https://lh3.googleusercontent.com/d/1gJtq5wlfvrpWFzZ-SZ56gwW7-2-msvgS',
+            'https://lh3.googleusercontent.com/d/1h29P7z-r6CtFLMmwJ_DAcXFR0vUfKZcm',
+            'https://lh3.googleusercontent.com/d/1jLy4BYi4P0oNIV8ywpnsUHzPi2ypuE-9',
+            'https://lh3.googleusercontent.com/d/1nssYE4IQ8vUWSIswyTcldujID_2_Smqs',
+            'https://lh3.googleusercontent.com/d/1oWTfQD0MHW9KJZ4M5PE79b1mB5cdEW8D',
+            'https://lh3.googleusercontent.com/d/1rLLLEMMdJ4hyQMYF1fRdmW45s3_iXMhT',
+            'https://lh3.googleusercontent.com/d/1xXgz2QA-OJMHxv1gMGHBDKL7NIA70rr9',
+            'https://lh3.googleusercontent.com/d/1zIvmG6KAP7a1dK9rPfcoO1LjXjGoKONO'
+        ];
+
+        let currentVideoIndex = 0;
+        let currentPhotoIndex = 0;
+
+        // Предзагрузка изображений для мгновенного открытия
+        const imageCache = new Map();
+        
+        function preloadImage(index) {
+            if (!imageCache.has(index)) {
+                const img = new Image();
+                img.src = photos[index];
+                imageCache.set(index, img);
+            }
+        }
+
+        // Предзагрузка первых 3 фото
+        setTimeout(() => {
+            preloadImage(0);
+            preloadImage(1);
+            preloadImage(2);
+        }, 1000);
+
+        function openVideo(index, title) {
+            currentVideoIndex = index;
+            const modal = document.getElementById('modal');
+            const player = document.getElementById('videoPlayer');
+            const modalTitle = document.getElementById('modalTitle');
+            
+            // Мгновенное открытие модалки
+            modal.classList.add('active');
+            modalTitle.textContent = title;
+            document.body.style.overflow = 'hidden';
+            
+            // Загрузка видео сразу после открытия
+            requestAnimationFrame(() => {
+                player.src = videos[index];
+            });
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById('modal');
+            const player = document.getElementById('videoPlayer');
+            
+            modal.classList.remove('active');
+            // Очистка iframe после закрытия анимации
+            setTimeout(() => {
+                player.src = '';
+            }, 300);
+            document.body.style.overflow = 'auto';
+        }
+
+        function openInNewTab() {
+            window.open(videoLinks[currentVideoIndex], '_blank');
+        }
+
+        function openPhoto(index) {
+            currentPhotoIndex = index;
+            const modal = document.getElementById('photoModal');
+            const img = document.getElementById('photoModalImg');
+            
+            // Используем предзагруженное изображение если есть
+            if (imageCache.has(index)) {
+                img.src = imageCache.get(index).src;
+            } else {
+                img.src = photos[index];
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Предзагрузка соседних изображений
+            preloadImage((index + 1) % photos.length);
+            preloadImage((index - 1 + photos.length) % photos.length);
+        }
+
+        function closePhoto() {
+            const modal = document.getElementById('photoModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function nextPhoto() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const img = document.getElementById('photoModalImg');
+            
+            if (imageCache.has(currentPhotoIndex)) {
+                img.src = imageCache.get(currentPhotoIndex).src;
+            } else {
+                img.src = photos[currentPhotoIndex];
+            }
+            
+            // Предзагрузка следующего
+            preloadImage((currentPhotoIndex + 1) % photos.length);
+        }
+
+        function prevPhoto() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const img = document.getElementById('photoModalImg');
+            
+            if (imageCache.has(currentPhotoIndex)) {
+                img.src = imageCache.get(currentPhotoIndex).src;
+            } else {
+                img.src = photos[currentPhotoIndex];
+            }
+            
+            // Предзагрузка предыдущего
+            preloadImage((currentPhotoIndex - 1 + photos.length) % photos.length);
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideo();
+                closePhoto();
+            }
+            const photoModal = document.getElementById('photoModal');
+            if (photoModal.classList.contains('active')) {
+                if (e.key === 'ArrowRight') nextPhoto();
+                if (e.key === 'ArrowLeft') prevPhoto();
+            }
+        });
+    </script>
+</body>
+</html>
